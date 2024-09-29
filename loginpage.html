@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+      body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #securedPage {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e6ffed;
+            border-radius: 8px;
+            color: #2d6a4f;
+        }
+        p {
+            margin: 0;
+            color: #666;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>REGISTER</h2>
+        <input type="text" id="registerUsername" placeholder="Enter username">
+        <input type="password" id="registerPassword" placeholder="Enter password">
+        <button onclick="register()">Register</button>
+        <h2>LOGIN</h2>
+        <input type="text" id="loginUsername" placeholder="Enter username">
+        <input type="password" id="loginPassword" placeholder="Enter password">
+        <button onclick="login()">Login</button>
+        <div id="securedPage">
+            <h2>Secured Page</h2>
+            <p class="success">Welcome! you are logged in.</p>
+        </div>
+    </div>
+    <script>
+        function register() {
+            const username = document.getElementById("registerUsername").value;
+            const password = document.getElementById("registerPassword").value;
+
+            if (localStorage.getItem(username)) {
+                alert("Username already exists! Please choose another.");
+            } else {
+                localStorage.setItem(username, password);
+                alert("Registration successful!");
+            }
+        }
+
+        function login() {
+            const username = document.getElementById("loginUsername").value;
+            const password = document.getElementById("loginPassword").value;
+
+            const storedPassword = localStorage.getItem(username);
+            if (storedPassword === password) {
+                alert("Login successful!");
+                document.getElementById("securedPage").style.display = "block";
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        }
+    </script>
+</body>
+</html>
